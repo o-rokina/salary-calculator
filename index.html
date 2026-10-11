@@ -3,84 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【無料】手取り給与・税金一括シミュレーター</title>
-    <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 20px; color: #333; background-color: #f4f6f8; }
-        .card { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-        h1 { font-size: 1.4rem; color: #2c3e50; text-align: center; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.95rem; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 1rem; }
-        button { width: 100%; padding: 12px; background: #27ae60; color: #fff; border: none; border-radius: 5px; font-size: 1.05rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        button:hover { background: #219150; }
-        .result-container { margin-top: 25px; background: #eef9f1; padding: 20px; border-radius: 8px; border: 1px solid #c8e6c9; }
-        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #a5d6a7; font-size: 0.95rem; }
-        .result-row.total { font-weight: bold; font-size: 1.2rem; border-bottom: none; color: #1b5e20; padding-top: 15px; }
-        .ad-box { background: #e0e0e0; padding: 15px; text-align: center; margin: 20px 0; border-radius: 5px; color: #666; font-size: 0.85rem; }
-        .affiliate-box { background: #fff8e1; border: 1px solid #ffe082; padding: 15px; border-radius: 5px; margin-top: 20px; }
-    </style>
+    <title>手取り給与・税金一括シミュレーター</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="card">
-        <h1>手取り給与・税金一括シミュレーター</h1>
-        <p style="font-size:0.85rem; color:#666; text-align:center;">額面年収を入力すると、社会保険料や所得税・住民税を差し引いた概算の手取り額を即座に計算します。</p>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
 
-        <!-- 広告枠（上部） -->
-        <div class="ad-box">【広告スペース / AdSense】</div>
+    <!-- ヘッダー -->
+    <header class="bg-white border-b border-slate-200 py-4 px-6 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-lg sm:text-xl font-bold text-blue-600">📊 手取り給与・税金一括シミュレーター</h1>
+            <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">無料Webツール群</span>
+        </div>
+    </header>
 
-        <div class="form-group">
-            <label for="salary">額面年収（万円）</label>
-            <input type="number" id="salary" placeholder="例: 450" value="450">
+    <!-- メインレイアウト（左側：サイドメニュー、右側：メインコンテンツ） -->
+    <main class="flex-grow max-w-6xl mx-auto w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- 左側：サイドメニュー（関連ツール・広告枠 / 1カラム分） -->
+        <aside class="space-y-6 order-2 lg:order-1">
+            
+            <!-- 関連ツール一覧 -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 border-b pb-2 flex items-center gap-1.5">
+                    <span>⚡</span> 便利な一括シミュレーター
+                </h3>
+                <ul class="space-y-2 text-xs">
+                    <li>
+                        <a href="index.html" class="block p-2.5 rounded-lg bg-blue-50 text-blue-700 font-bold border border-blue-200">
+                            📊 手取り給与・税金一括シミュレーター
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mortgage.html" class="block p-2.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-600 transition font-medium text-slate-700 border border-slate-100">
+                            🏠 住宅ローン返済＆借入限度額
+                        </a>
+                    </li>
+                    <!-- 今後追加するツール枠の例 -->
+                    <li>
+                        <div class="block p-2.5 rounded-lg bg-slate-50 text-slate-400 border border-slate-100 cursor-not-allowed">
+                            ⏳ フリーランス手取り計算 (準備中)
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- サイドバー広告枠 -->
+            <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400 text-xs">
+                [ サイドバー広告 ]
+            </div>
+
+        </aside>
+
+        <!-- 右側：メインコンテンツ (3カラム分) -->
+        <div class="lg:col-span-3 space-y-6 order-1 lg:order-2">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 入力フォーム -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="text-base font-bold border-b pb-2 text-slate-700">条件入力</h2>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">年収 (万円)</label>
+                        <input type="number" id="salary" value="500" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">年齢</label>
+                        <input type="number" id="age" value="30" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">扶養家族の人数</label>
+                        <input type="number" id="dependents" value="0" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <button onclick="calcSalary()" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm hover:bg-blue-700 transition shadow-md">
+                        計算する
+                    </button>
+                </div>
+
+                <!-- 結果表示エリア -->
+                <div class="space-y-4">
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-2xl shadow-sm">
+                        <h2 class="text-xs font-bold text-blue-700 uppercase tracking-wider">推定手取り額</h2>
+                        <div class="mt-3 space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-xs text-slate-600">年間手取り:</span>
+                                <span class="text-xl font-black text-blue-900" id="netAnnual">-- 万円</span>
+                            </div>
+                            <div class="flex justify-between items-baseline border-t border-blue-200 pt-2">
+                                <span class="text-xs text-slate-600">月給換算(目安):</span>
+                                <span class="text-sm font-bold text-slate-700" id="netMonthly">-- 万円</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl shadow-sm space-y-2 text-xs">
+                        <h3 class="font-bold text-slate-700">控除・税金の内訳（目安）</h3>
+                        <div class="flex justify-between"><span class="text-slate-500">所得税:</span><span id="incomeTax" class="font-medium">-- 万円</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">住民税:</span><span id="residentTax" class="font-medium">-- 万円</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">社会保険料:</span><span id="socialInsurance" class="font-medium">-- 万円</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- コンテンツ内広告枠 -->
+            <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400 text-xs">
+                [ 広告スペース（Google アドセンスなど） ]
+            </div>
+
         </div>
 
-        <button onclick="calculate()">手取り額を計算する</button>
+    </main>
 
-        <div id="result" class="result-container" style="display: none;">
-            <div class="result-row"><span>額面年収：</span><span id="res-salary">0 万円</span></div>
-            <div class="result-row"><span>社会保険料（概算）：</span><span id="res-shakai">0 万円</span></div>
-            <div class="result-row"><span>所得税＋住民税（概算）：</span><span id="res-tax">0 万円</span></div>
-            <div class="result-row total"><span>年間手取り額：</span><span id="res-tedori">0 万円</span></div>
-            <div class="result-row" style="border-bottom:none; font-size:0.9rem; color:#555;"><span>（目安月給手取り）：</span><span id="res-monthly">0 万円 / 月</span></div>
-        </div>
+    <!-- フッター -->
+    <footer class="bg-white border-t border-slate-200 text-center py-6 text-xs text-slate-400 mt-auto">
+        &copy; 2026 ウェブ便利ツール集 All Rights Reserved.
+    </footer>
 
-        <!-- 高単価アフィリエイト枠（転職・副業系） -->
-        <div class="affiliate-box">
-            <p style="font-weight:bold; margin-0 0 5px 0; color:#b78103;">💡 手取りを増やしたい方へ</p>
-            <p style="font-size:0.85rem; margin:0 0 10px 0; color:#444;">自身の市場価値を把握し、適正年収の企業へ転職することで手取り額が大きく増える可能性があります。</p>
-            <a href="#" style="display:block; text-align:center; background:#ff9800; color:#fff; padding:10px; text-decoration:none; font-weight:bold; border-radius:4px;">無料の年収診断・転職相談はこちら（広告）</a>
-        </div>
-
-        <!-- 広告枠（下部） -->
-        <div class="ad-box">【広告スペース / AdSense】</div>
-    </div>
-
+    <!-- 簡易計算ロジック -->
     <script>
-        function calculate() {
+        function calcSalary() {
             const salary = parseFloat(document.getElementById('salary').value);
-            if (isNaN(salary) || salary <= 0) return;
-
-            // 簡易計算ロジック（社会保険料 約15%、税金 概算）
-            const shakai = salary * 0.15;
-            let tax = 0;
-            if (salary <= 300) {
-                tax = salary * 0.05;
-            } else if (salary <= 600) {
-                tax = salary * 0.10;
-            } else {
-                tax = salary * 0.18;
+            if (isNaN(salary)) {
+                alert('年収を入力してください。');
+                return;
             }
+            // 簡易的な目安計算ロジック
+            const social = salary * 0.15; // 社会保険料約15%
+            const taxable = salary - social - 55; // 基礎控除等簡易計算
+            const incomeTax = Math.max(0, taxable * 0.1); // 所得税簡易
+            const residentTax = Math.max(0, taxable * 0.1); // 住民税簡易
+            const totalTax = social + incomeTax + residentTax;
+            const net = salary - totalTax;
 
-            const tedori = salary - shakai - tax;
-            const monthly = tedori / 12;
-
-            document.getElementById('res-salary').innerText = salary.toFixed(1) + ' 万円';
-            document.getElementById('res-shakai').innerText = shakai.toFixed(1) + ' 万円';
-            document.getElementById('res-tax').innerText = tax.toFixed(1) + ' 万円';
-            document.getElementById('res-tedori').innerText = tedori.toFixed(1) + ' 万円';
-            document.getElementById('res-monthly').innerText = monthly.toFixed(1) + ' 万円 / 月';
-
-            document.getElementById('result').style.display = 'block';
+            document.getElementById('netAnnual').innerText = Math.round(net * 10) / 10 + ' 万円';
+            document.getElementById('netMonthly').innerText = Math.round((net / 12) * 10) / 10 + ' 万円';
+            document.getElementById('incomeTax').innerText = Math.round(incomeTax * 10) / 10 + ' 万円';
+            document.getElementById('residentTax').innerText = Math.round(residentTax * 10) / 10 + ' 万円';
+            document.getElementById('socialInsurance').innerText = Math.round(social * 10) / 10 + ' 万円';
         }
+
+        window.onload = calcSalary;
     </script>
 </body>
 </html>
