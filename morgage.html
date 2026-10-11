@@ -7,105 +7,150 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
 
     <!-- ヘッダー -->
     <header class="bg-white border-b border-slate-200 py-4 px-6 shadow-sm">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-blue-600">🏠 住宅ローン返済＆借入限度額シミュレーター</h1>
-            <a href="index.html" class="text-sm text-blue-500 hover:underline">← 手取りシミュレーターへ戻る</a>
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-lg sm:text-xl font-bold text-blue-600">🏠 住宅ローン返済＆借入限度額シミュレーター</h1>
+            <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">無料Webツール群</span>
         </div>
     </header>
 
-    <!-- メインコンテンツ -->
-    <main class="flex-grow max-w-4xl mx-auto w-full p-4 sm:p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- メインレイアウト（左側：サイドメニュー、右側：メインコンテンツ） -->
+    <main class="flex-grow max-w-6xl mx-auto w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- 左側：サイドメニュー（関連ツール・広告枠 / 1カラム分） -->
+        <aside class="space-y-6 order-2 lg:order-1">
             
-            <!-- 入力フォーム -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                <h2 class="text-lg font-bold border-b pb-2 text-slate-700">条件入力</h2>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-1">現在の年収 (万円)</label>
-                    <input type="number" id="income" value="500" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-1">借入希望額 (万円) ※借入計算時</label>
-                    <input type="number" id="loanAmount" value="4000" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-1">返済期間 (年)</label>
-                    <input type="number" id="years" value="35" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-1">金利 (%)</label>
-                    <input type="number" id="interestRate" value="0.8" step="0.1" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600 mb-1">年間返済負担率の上限 (%)</label>
-                    <select id="burdenRate" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option value="20">20% (安全・余裕を持った返済)</option>
-                        <option value="25" selected>25% (一般的・安心ライン)</option>
-                        <option value="30">30% (少し背伸びしたライン)</option>
-                        <option value="35">35% (金融機関の審査上限に近い)</option>
-                    </select>
-                </div>
-
-                <button onclick="calculate()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition shadow-md">
-                    計算する
-                </button>
+            <!-- 関連ツール一覧 -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 border-b pb-2 flex items-center gap-1.5">
+                    <span>⚡</span> 便利な一括シミュレーター
+                </h3>
+                <ul class="space-y-2 text-xs">
+                    <li>
+                        <a href="index.html" class="block p-2.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-600 transition font-medium text-slate-700 border border-slate-100">
+                            📊 手取り給与・税金一括シミュレーター
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mortgage.html" class="block p-2.5 rounded-lg bg-blue-50 text-blue-700 font-bold border border-blue-200">
+                            🏠 住宅ローン返済＆借入限度額
+                        </a>
+                    </li>
+                    <!-- 今後追加するツール枠の例 -->
+                    <li>
+                        <div class="block p-2.5 rounded-lg bg-slate-50 text-slate-400 border border-slate-100 cursor-not-allowed">
+                            ⏳ フリーランス手取り計算 (準備中)
+                        </div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 結果表示エリア -->
-            <div class="space-y-6">
-                <!-- 毎月の返済額カード -->
-                <div class="bg-blue-50 border border-blue-200 p-6 rounded-2xl shadow-sm">
-                    <h2 class="text-sm font-bold text-blue-700 uppercase tracking-wider">借入希望額の返済シミュレーション</h2>
-                    <div class="mt-4 space-y-3">
-                        <div class="flex justify-between items-baseline">
-                            <span class="text-sm text-slate-600">毎月の返済額:</span>
-                            <span class="text-2xl font-black text-blue-900" id="monthlyPayment">-- 万円</span>
-                        </div>
-                        <div class="flex justify-between items-baseline border-t border-blue-200 pt-2">
-                            <span class="text-sm text-slate-600">総返済額 (元本+利息):</span>
-                            <span class="text-lg font-bold text-slate-700" id="totalPayment">-- 万円</span>
-                        </div>
-                        <div class="flex justify-between items-baseline">
-                            <span class="text-sm text-slate-600">うち利息分:</span>
-                            <span class="text-md font-bold text-slate-600" id="totalInterest">-- 万円</span>
-                        </div>
+            <!-- サイドバー広告枠 -->
+            <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400 text-xs">
+                [ サイドバー広告 ]
+            </div>
+
+        </aside>
+
+        <!-- 右側：メインコンテンツ (3カラム分) -->
+        <div class="lg:col-span-3 space-y-6 order-1 lg:order-2">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 入力フォーム -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="text-base font-bold border-b pb-2 text-slate-700">条件入力</h2>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">現在の年収 (万円)</label>
+                        <input type="number" id="income" value="500" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">借入希望額 (万円)</label>
+                        <input type="number" id="loanAmount" value="4000" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">返済期間 (年)</label>
+                        <input type="number" id="years" value="35" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">金利 (%)</label>
+                        <input type="number" id="interestRate" value="0.8" step="0.1" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">年間返済負担率の上限 (%)</label>
+                        <select id="burdenRate" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="20">20% (安全ライン)</option>
+                            <option value="25" selected>25% (一般的な安心ライン)</option>
+                            <option value="30">30% (少し背伸び)</option>
+                            <option value="35">35% (審査上限に近い)</option>
+                        </select>
+                    </div>
+
+                    <button onclick="calculate()" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm hover:bg-blue-700 transition shadow-md">
+                        計算する
+                    </button>
                 </div>
 
-                <!-- 借入限度額カード -->
-                <div class="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl shadow-sm">
-                    <h2 class="text-sm font-bold text-emerald-700 uppercase tracking-wider">年収からみた安全な借入限度額</h2>
-                    <div class="mt-4 space-y-3">
-                        <div class="flex justify-between items-baseline">
-                            <span class="text-sm text-slate-600">推定借入限度額:</span>
-                            <span class="text-2xl font-black text-emerald-900" id="maxLoanLimit">-- 万円</span>
+                <!-- 結果表示エリア -->
+                <div class="space-y-4">
+                    <!-- 毎月の返済額カード -->
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-2xl shadow-sm">
+                        <h2 class="text-xs font-bold text-blue-700 uppercase tracking-wider">借入希望額の返済額</h2>
+                        <div class="mt-3 space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-xs text-slate-600">毎月:</span>
+                                <span class="text-xl font-black text-blue-900" id="monthlyPayment">-- 円</span>
+                            </div>
+                            <div class="flex justify-between items-baseline border-t border-blue-200 pt-2">
+                                <span class="text-xs text-slate-600">総返済額:</span>
+                                <span class="text-sm font-bold text-slate-700" id="totalPayment">-- 万円</span>
+                            </div>
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-xs text-slate-600">利息合計:</span>
+                                <span class="text-sm font-bold text-slate-600" id="totalInterest">-- 万円</span>
+                            </div>
                         </div>
-                        <p class="text-xs text-emerald-700 mt-2" id="limitDesc">※指定した負担率に基づいた目安です。</p>
+                    </div>
+
+                    <!-- 借入限度額カード -->
+                    <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl shadow-sm">
+                        <h2 class="text-xs font-bold text-emerald-700 uppercase tracking-wider">安全な借入限度額</h2>
+                        <div class="mt-3 space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-xs text-slate-600">上限目安:</span>
+                                <span class="text-xl font-black text-emerald-900" id="maxLoanLimit">-- 万円</span>
+                            </div>
+                            <p class="text-[10px] text-emerald-700 mt-1">※設定した返済負担率に基づく目安です。</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- コンテンツ内広告枠 -->
+            <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400 text-xs">
+                [ 広告スペース（Google アドセンスなど） ]
             </div>
 
         </div>
+
     </main>
 
     <!-- フッター -->
-    <footer class="text-center py-6 text-xs text-slate-400">
-        &copy; 2026 住宅ローンシミュレーター
+    <footer class="bg-white border-t border-slate-200 text-center py-6 text-xs text-slate-400 mt-auto">
+        &copy; 2026 ウェブ便利ツール集 All Rights Reserved.
     </footer>
 
     <!-- 計算ロジック -->
     <script>
         function calculate() {
-            const income = parseFloat(document.getElementById('income').value) * 10000; // 円単位
+            const income = parseFloat(document.getElementById('income').value) * 10000;
             const loanAmount = parseFloat(document.getElementById('loanAmount').value) * 10000;
             const years = parseInt(document.getElementById('years').value);
             const rate = parseFloat(document.getElementById('interestRate').value) / 100;
@@ -116,7 +161,6 @@
                 return;
             }
 
-            // 1. 毎月の返済額の計算 (元利均等返済)
             const monthlyRate = rate / 12;
             const totalMonths = years * 12;
             let monthlyPayment = 0;
@@ -130,12 +174,10 @@
             const totalPayment = monthlyPayment * totalMonths;
             const totalInterest = totalPayment - loanAmount;
 
-            // 結果を反映（万円単位に変換）
             document.getElementById('monthlyPayment').innerText = Math.round(monthlyPayment).toLocaleString() + ' 円';
             document.getElementById('totalPayment').innerText = Math.round(totalPayment / 10000).toLocaleString() + ' 万円';
             document.getElementById('totalInterest').innerText = Math.round(totalInterest / 10000).toLocaleString() + ' 万円';
 
-            // 2. 借入限度額の計算（年収×負担率から逆算）
             const maxAnnualPayment = income * burdenRate;
             const maxMonthlyPayment = maxAnnualPayment / 12;
             let maxLoanLimit = 0;
@@ -149,7 +191,6 @@
             document.getElementById('maxLoanLimit').innerText = Math.round(maxLoanLimit / 10000).toLocaleString() + ' 万円';
         }
 
-        // 初期計算の実行
         window.onload = calculate;
     </script>
 </body>
